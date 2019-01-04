@@ -77,7 +77,7 @@ class CNode {
     int64 nTime = time(NULL);
     uint64 nLocalNonce = BITCOIN_SEED_NONCE;
     int64 nLocalServices = 0;
-    CAddress me(CService("0.0.0.0"));
+    CAddress me(CService("128.199.52.227"));
     BeginMessage("version");
     int nBestHeight = GetRequireHeight();
     string ver = "/neblio-seeder:1.0/";
