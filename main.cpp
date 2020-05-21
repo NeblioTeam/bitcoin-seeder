@@ -281,7 +281,7 @@ extern "C" void* ThreadDumper(void*) {
   int count = 0;
   do {
     Sleep(100000 << count); // First 100s, than 200s, 400s, 800s, 1600s, and then 3200s forever
-    if (count < 5)
+    if (count < 3) // changed from 5 to 3 to write to disk more frequently
         count++;
     {
       vector<CAddrReport> v = db.GetAll();
