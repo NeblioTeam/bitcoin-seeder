@@ -21,7 +21,7 @@ using namespace std;
 typedef std::pair<CService, int> proxyType;
 static proxyType proxyInfo[NET_MAX];
 static proxyType nameproxyInfo;
-int nConnectTimeout = 5000;
+int nConnectTimeout = 30000;
 bool fNameLookup = false;
 
 static const unsigned char pchIPv4[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff };
