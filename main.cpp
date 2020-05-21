@@ -328,7 +328,7 @@ extern "C" void* ThreadStats(void*) {
       first = false;
       // printf("\n\n\n\x1b[3A");
     }
-    else
+    // else
       // printf("\x1b[2K\x1b[u");
     // printf("\x1b[s");
     uint64_t requests = 0;
