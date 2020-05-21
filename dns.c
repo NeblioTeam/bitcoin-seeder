@@ -415,7 +415,7 @@ int dnsserver(dns_opt_t *opt) {
   {
     ssize_t insize = recvmsg(listenSocket, &msg, 0);
     unsigned char *addr = (unsigned char*)&si6_other.sin6_addr;
-    printf("DNS: Request %llu from %i.%i.%i.%i:%i of %i bytes\n", (unsigned long long)(opt->nRequests), addr[0], addr[1], addr[2], addr[3], ntohs(si_other.sin_port), (int)insize);
+//    printf("DNS: Request %llu from %i.%i.%i.%i:%i of %i bytes\n", (unsigned long long)(opt->nRequests), addr[0], addr[1], addr[2], addr[3], ntohs(si_other.sin_port), (int)insize);
     if (insize <= 0)
       continue;
 
