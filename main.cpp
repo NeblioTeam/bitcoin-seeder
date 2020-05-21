@@ -326,18 +326,18 @@ extern "C" void* ThreadStats(void*) {
     if (first)
     {
       first = false;
-      printf("\n\n\n\x1b[3A");
+      // printf("\n\n\n\x1b[3A");
     }
     else
-      printf("\x1b[2K\x1b[u");
-    printf("\x1b[s");
+      // printf("\x1b[2K\x1b[u");
+    // printf("\x1b[s");
     uint64_t requests = 0;
     uint64_t queries = 0;
     for (unsigned int i=0; i<dnsThread.size(); i++) {
       requests += dnsThread[i]->dns_opt.nRequests;
       queries += dnsThread[i]->dbQueries;
     }
-    printf("%s %i/%i available (%i tried in %is, %i new, %i active), %i banned; %llu DNS requests, %llu db queries", c, stats.nGood, stats.nAvail, stats.nTracked, stats.nAge, stats.nNew, stats.nAvail - stats.nTracked - stats.nNew, stats.nBanned, (unsigned long long)requests, (unsigned long long)queries);
+    printf("%s %i/%i available (%i tried in %is, %i new, %i active), %i banned; %llu DNS requests, %llu db queries\n", c, stats.nGood, stats.nAvail, stats.nTracked, stats.nAge, stats.nNew, stats.nAvail - stats.nTracked - stats.nNew, stats.nBanned, (unsigned long long)requests, (unsigned long long)queries);
     Sleep(1000);
   } while(1);
 }
@@ -395,7 +395,7 @@ int main(int argc, char **argv) {
   }
   FILE *f = fopen("dnsseed.dat","r");
   if (f) {
-    printf("Loading dnsseed.dat...");
+    printf("Loading dnsseed.dat...\n");
     CAutoFile cf(f);
     cf >> db;
     if (opts.fWipeBan)
@@ -406,7 +406,7 @@ int main(int argc, char **argv) {
   }
   pthread_t threadDns, threadSeed, threadDump, threadStats;
   if (fDNS) {
-    printf("Starting %i DNS threads for %s on %s (port %i)...", opts.nDnsThreads, opts.host, opts.ns, opts.nPort);
+    printf("Starting %i DNS threads for %s on %s (port %i)...\n", opts.nDnsThreads, opts.host, opts.ns, opts.nPort);
     dnsThread.clear();
     for (int i=0; i<opts.nDnsThreads; i++) {
       dnsThread.push_back(new CDnsThread(&opts, i));
@@ -419,7 +419,7 @@ int main(int argc, char **argv) {
   printf("Starting seeder...");
   pthread_create(&threadSeed, NULL, ThreadSeeder, NULL);
   printf("done\n");
-  printf("Starting %i crawler threads...", opts.nThreads);
+  printf("Starting %i crawler threads...\n", opts.nThreads);
   pthread_attr_t attr_crawler;
   pthread_attr_init(&attr_crawler);
   pthread_attr_setstacksize(&attr_crawler, 0x20000);
