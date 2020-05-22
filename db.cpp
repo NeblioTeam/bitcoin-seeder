@@ -72,6 +72,7 @@ int CAddrDb::Lookup_(const CService &ip) {
 void CAddrDb::Good_(const CService &addr, int clientV, std::string clientSV, int blocks) {
   int id = Lookup_(addr);
   if (id == -1) return;
+  if (addr.GetPort() < 1) return; // Randomly we will get port 0 addrs, ignore them
   unkId.erase(id);
   banned.erase(addr);
   CAddrInfo &info = idToInfo[id];
@@ -91,6 +92,7 @@ void CAddrDb::Bad_(const CService &addr, int ban)
 {
   int id = Lookup_(addr);
   if (id == -1) return;
+  if (addr.GetPort() < 1) return; // Randomly we will get port 0 addrs, ignore them
   unkId.erase(id);
   CAddrInfo &info = idToInfo[id];
   info.Update(false);
