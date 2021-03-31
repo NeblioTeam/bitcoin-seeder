@@ -113,21 +113,21 @@ public:
     if (stat8H.reliability > 0.70 && stat8H.count > 4) return true;
     if (stat1D.reliability > 0.55 && stat1D.count > 8) return true;
     if (stat1W.reliability > 0.45 && stat1W.count > 16) return true;
-    if (stat1M.reliability > 0.35 && stat1M.count > 32) return true;
+    //if (stat1M.reliability > 0.35 && stat1M.count > 32) return true;
 
     return false;
   }
   int GetBanTime() const {
     if (IsGood()) return 0;
     // if (clientVersion && clientVersion < 90102) { return 604800; }
-    if (stat1M.reliability - stat1M.weight + 1.0 < 0.15 && stat1M.count > 32) { return 30*86400; }
+    // if (stat1M.reliability - stat1M.weight + 1.0 < 0.15 && stat1M.count > 32) { return 30*86400; }
     if (stat1W.reliability - stat1W.weight + 1.0 < 0.10 && stat1W.count > 16) { return 7*86400; }
     if (stat1D.reliability - stat1D.weight + 1.0 < 0.05 && stat1D.count > 8) { return 1*86400; }
     return 0;
   }
   int GetIgnoreTime() const {
     if (IsGood()) return 0;
-    if (stat1M.reliability - stat1M.weight + 1.0 < 0.20 && stat1M.count > 2) { return 10*86400; }
+    // if (stat1M.reliability - stat1M.weight + 1.0 < 0.20 && stat1M.count > 2) { return 10*86400; }
     if (stat1W.reliability - stat1W.weight + 1.0 < 0.16 && stat1W.count > 2)  { return 3*86400; }
     if (stat1D.reliability - stat1D.weight + 1.0 < 0.12 && stat1D.count > 2)  { return 8*3600; }
     if (stat8H.reliability - stat8H.weight + 1.0 < 0.08 && stat8H.count > 2)  { return 2*3600; }
